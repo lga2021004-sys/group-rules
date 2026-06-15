@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#247f8a">
+  <meta name="robots" content="noindex, nofollow">
+  <title>群組規章 & 自介須知</title>
+  <style>
+:root {
+  --teal: #247f8a;
+  --teal-dark: #155e69;
+  --teal-light: #a8dce2;
+  --cream: #f8f4e9;
+  --paper: #fffdf7;
+  --ink: #17272c;
+  --gold: #c89b50;
+  --orange: #e8874f;
+  --red: #c94c43;
+  --line: #d8c79e;
+  font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+  color: var(--ink);
+  background: #e9eeeb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(36,127,138,.08) 1px, transparent 1px),
+    var(--cream);
+  background-size: 24px 24px;
+}
+
+button, input { font: inherit; }
+
+.topbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 104px;
+  padding: 16px max(24px, calc((100vw - 1440px) / 2));
+  color: white;
+  background: linear-gradient(135deg, var(--teal-dark), #3295a0);
+  border-bottom: 5px solid var(--gold);
+  box-shadow: 0 4px 16px #143e4650;
+}
+
+.brand { display: flex; align-items: center; gap: 15px; }
+.brand-mark { font-size: 44px; color: #f1c46d; }
+.brand h1 { margin: 0; font-size: clamp(24px, 3vw, 38px); letter-spacing: .08em; }
+.brand p { margin: 3px 0 0; font-weight: 700; opacity: .88; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: min(360px, 34vw);
+  padding: 8px 12px;
+  color: var(--teal-dark);
+  font-weight: 800;
+  background: white;
+  border: 2px solid #e6c079;
+  border-radius: 14px;
+}
+
+.share-button {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  color: var(--teal-dark);
+  font-weight: 900;
+  background: #f8d993;
+  border: 2px solid #fff2c6;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.share-button:hover { background: #ffe6ad; }
+
+.share-status {
+  position: fixed;
+  z-index: 40;
+  right: 18px;
+  bottom: 18px;
+  max-width: calc(100vw - 36px);
+  padding: 11px 16px;
+  color: white;
+  font-weight: 800;
+  background: var(--teal-dark);
+  border-radius: 12px;
+  box-shadow: 0 5px 18px #17383d55;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.share-status.show { opacity: 1; transform: translateY(0); }
+
+.search input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+}
+
+.category-strip {
+  position: sticky;
+  z-index: 15;
+  top: 104px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px max(16px, calc((100vw - 1440px) / 2));
+  background: #edf3f0ed;
+  border-bottom: 1px solid #bfd0c8;
+  scrollbar-width: thin;
+}
+
+.category-button {
+  flex: 0 0 auto;
+  padding: 9px 14px;
+  color: var(--teal-dark);
+  font-weight: 800;
+  background: white;
+  border: 1px solid #b8cbc5;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.category-button.active,
+.category-button:hover {
+  color: white;
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.board {
+  width: min(1440px, calc(100% - 32px));
+  margin: 24px auto;
+  padding: clamp(16px, 2.3vw, 32px);
+  background: var(--paper);
+  border: 12px solid var(--teal);
+  outline: 3px solid var(--gold);
+  outline-offset: -20px;
+  border-radius: 28px;
+  box-shadow: 0 10px 28px #193f4630;
+}
+
+.panel {
+  min-width: 0;
+  overflow: hidden;
+  background: linear-gradient(145deg, #fffef9, #f7f1e4);
+  border: 2px solid #c7c4b9;
+  border-radius: 22px;
+  box-shadow: 0 5px 10px #213c4230;
+}
+
+.panel-title {
+  margin: 0;
+  padding: 12px 16px;
+  color: white;
+  font-size: clamp(19px, 2vw, 27px);
+  letter-spacing: .04em;
+  background: linear-gradient(#3a9ba6, var(--teal));
+  text-shadow: 0 2px 1px #17383d;
+}
+
+.panel-title.pale {
+  color: var(--ink);
+  background: var(--teal-light);
+  text-shadow: none;
+}
+
+.mission {
+  display: grid;
+  grid-template-columns: minmax(230px, .8fr) 2fr;
+  margin-bottom: 16px;
+}
+
+.mission-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 14px 18px;
+  font-size: clamp(16px, 2vw, 24px);
+}
+
+.mission-copy span { font-size: .72em; font-weight: 700; color: #425357; }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.wide { grid-column: span 2; }
+
+.summary-list, .static-list { padding: 14px 18px 16px; }
+.summary-list p, .static-list p {
+  margin: 7px 0;
+  font-size: clamp(15px, 1.5vw, 20px);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.two-column { columns: 2; column-gap: 22px; }
+.compact p { margin: 4px 0; }
+
+.penalty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px;
+}
+
+.penalty-grid p {
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+  background: #e8f4f1;
+  border-radius: 12px;
+}
+
+.penalty-grid p:nth-child(2) { background: #fae4d8; }
+.penalty-grid p:nth-child(3) { background: #f8e8bd; }
+
+.detail-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  color: white;
+  background: var(--teal);
+  border-radius: 18px;
+}
+
+.detail-heading p, .detail-heading h2 { margin: 0; }
+.detail-heading p { font-size: 13px; opacity: .8; }
+.detail-heading h2 { font-size: clamp(22px, 3vw, 32px); }
+
+.back-button {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  color: var(--teal-dark);
+  font-weight: 800;
+  background: #fff8e8;
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.rule-list { display: grid; gap: 12px; }
+
+.rule-card {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px;
+  background: #fffef9;
+  border: 1px solid #d5d0c3;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px #223c4220;
+}
+
+.rule-number {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: white;
+  font-size: 21px;
+  font-weight: 900;
+  background: var(--teal);
+  border-radius: 12px;
+}
+
+.rule-copy { white-space: pre-line; font-size: clamp(16px, 1.7vw, 20px); font-weight: 700; line-height: 1.65; }
+.rule-category { color: var(--teal); font-size: 13px; font-weight: 900; }
+.empty { padding: 50px 16px; text-align: center; font-size: 20px; font-weight: 800; color: #68777a; }
+
+footer {
+  padding: 18px;
+  text-align: center;
+  color: var(--teal-dark);
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wide { grid-column: span 1; }
+  .mission { grid-template-columns: 1fr; }
+  .penalty-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    position: relative;
+    display: block;
+    min-height: 0;
+    padding: 15px 16px;
+  }
+
+  .brand-mark { font-size: 34px; }
+  .brand h1 { font-size: 23px; letter-spacing: .03em; }
+  .brand p { font-size: 12px; }
+  .header-actions { width: 100%; margin-top: 12px; }
+  .search { flex: 1 1 auto; width: auto; min-width: 0; }
+  .share-button { padding: 11px 12px; }
+
+  .category-strip { top: 0; padding: 9px 10px; }
+
+  .board {
+    width: calc(100% - 16px);
+    margin: 12px 8px;
+    padding: 14px;
+    border-width: 7px;
+    outline-width: 2px;
+    outline-offset: -12px;
+    border-radius: 20px;
+  }
+
+  .dashboard { display: flex; flex-direction: column; gap: 12px; }
+  .panel-title { padding: 11px 13px; font-size: 20px; }
+  .mission-copy { justify-content: flex-start; padding: 13px; }
+  .two-column { columns: 1; }
+
+  .detail-heading { align-items: flex-start; padding: 12px; }
+  .back-button { padding: 8px 10px; }
+  .rule-card { grid-template-columns: 40px 1fr; gap: 10px; padding: 12px; }
+  .rule-number { width: 38px; height: 38px; font-size: 17px; border-radius: 10px; }
+  .rule-copy { font-size: 16px; line-height: 1.55; }
+}
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">⚖</span>
+      <div>
+        <h1>群組規章 & 自介須知</h1>
+        <p>Group Rules & Intro Guide</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <label class="search">
+        <span>搜尋</span>
+        <input id="searchInput" type="search" placeholder="輸入關鍵字…" autocomplete="off">
+      </label>
+      <button id="shareButton" class="share-button" type="button">分享網址</button>
+    </div>
+  </header>
+
+  <div class="category-strip" id="categoryStrip" aria-label="規定分類"></div>
+
+  <main class="board">
+    <section id="overviewPage">
+      <div class="mission panel">
+        <div class="panel-title pale"><span>🤝</span>【群組宗旨】</div>
+        <div class="mission-copy">
+          <b>❤ 認識可以發生關係的好朋友</b>
+          <span>推薦制・聚集觀念與價值觀接近的成員</span>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <section class="panel" data-summary="特別注意">
+          <h2 class="panel-title">⚠【重要告知】</h2>
+          <div class="summary-list" id="noticeSummary"></div>
+        </section>
+
+        <section class="panel wide" data-summary="群組規定">
+          <h2 class="panel-title">⚠【核心規定】</h2>
+          <div class="summary-list two-column" id="rulesSummary"></div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">⚖【互動準則】</h2>
+          <div class="static-list">
+            <p>📒 善用記事本公告統計活動</p>
+            <p>📣 廣告／活動七天為限</p>
+            <p>⌛ 冷靜處理問題</p>
+            <p>💬 非當事者不八卦</p>
+            <p>👤 被離群請保持風度</p>
+          </div>
+        </section>
+
+        <section class="panel wide">
+          <h2 class="panel-title">🛑【群組進出 & 罰則】</h2>
+          <div class="penalty-grid" id="entrySummary"></div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">📋【自介相簿格式】</h2>
+          <div class="summary-list compact" id="introSummary"></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="detailPage" hidden>
+      <div class="detail-heading">
+        <button id="backButton" class="back-button">← 返回總覽</button>
+        <div>
+          <p>完整內容</p>
+          <h2 id="detailTitle"></h2>
+        </div>
+      </div>
+      <div class="rule-list" id="ruleList"></div>
+    </section>
+
+    <section id="searchPage" hidden>
+      <div class="detail-heading">
+        <button id="clearSearch" class="back-button">← 清除搜尋</button>
+        <div>
+          <p>搜尋結果</p>
+          <h2 id="searchTitle"></h2>
+        </div>
+      </div>
+      <div class="rule-list" id="searchResults"></div>
+    </section>
+  </main>
+
+  <footer>本頁重視互相尊重、隱私安全與良好互動</footer>
+  <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
+  <script id="rulesData" type="application/json">"2026.01規定 \n\n【群組主旨】\n目的：認識可以發生關係的好朋友\n做法：採推薦制，聚集觀念與價值觀接近的成員\n\n【特別注意】\n以下動作請提前在群組對話告知，避免成員不理解狀況\n1. 暫離群組\n2. 拉舊人回群\n3. 變更/刪除自介(第一次上自介不用告知)\n\n【群組規定】\n1. 新人加入群組後，24小時內請完成自介\n2. 欲私下聊天，務必在群組對話中確認對方同意加好友（自介有寫私加不用問才不用問，不然一律要問）\n3. 注意隱私／禮貌／安全，嚴禁槍砲／彈藥／毒品\n4. 群組官方活動限定系列群組成員參加，不接受刪退或違規者，但主辦者保留邀請的最後權利\n5. 請善用記事本公告統計活動，活動過期請刪除，廣告文上架七天為限\n6. 處理問題勿意氣用事，請冷靜思考並尋求協助\n7. 非當事者請勿八卦，請盡量取得雙方說法平衡事實\n8. 若被請離群組，請保持風度好聚好散\n9. 群組依賴人員自主管理，目前成員都珍惜這裡，群組相對安全，數十年來未發生重大事故\n10. 管理員僅負責維持群組運作，不處理私事，有問題請備妥證據投訴（人證物證對話均可）\n11. 誤刪地區自介相簿者, 禁止入群三個月, 並請帶業績回來\n12. 每年均會更新搬到新群組，保持成員熱度\n13. @All 功能使用範圍：管理員or攸關群組利益or緊急人身安全事件\n14. 專案進群朋友, 完成專案任務前不得私加好友\n\n【群組進出方式】\n進入 : \n    1. 新人→管理員審核通過\n    2. 舊人→群組對話內告知後邀請\n     (無自介或被管理員請離的視同新人)\n離開 : \n    1. 對群組無貢獻 \n    (未推薦朋友/不聊天/不參與活動/無特殊功能等等...)\n    2. 違反規定(最多三次即永久禁止回群)\n    3. 頻率不合(由管理員主觀認定)\n    4. 找人頭進群\n    5. 30天內未發言，列為優先請離對象\n罰則：(回來均須帶業績)\n    小錯→請離1~30天 ( 私加/酒醉失控/無禮 ... )\n    大錯→請離30~180天 ( 蓄意無套/PUA/欺騙感情...)\n\n【自介相簿發布內容】\n1. 暱稱 : (需與LINE名稱相同)\n2. 身高/體重/年齡 : \n3. 尺寸 : (長度/罩杯)\n4. 感情狀態 : (單身/有男女朋友/已婚, 禁止填寫非單)\n5. 活動地區 : (居住地或活動地)\n6. 想說的話 : \n7. 介紹人 :\n8. 2張照片(請維持LINE頭貼或自介相簿有一張清晰臉照)\n\n*以上為必要資訊, 請將上述內容製成一張照片上傳到分區相簿（可去掉標題title, 較為美觀）\n*可用記事本截圖或美圖秀秀製作, 僅能放一個地區\n*製作自介內容時, 請考慮自身風險承受程度\n\n【介紹朋友入群注意事項】\n1. 請勿直接提供管理員帳號給對方\n2. 勿提前告知管理員帳號與群組名稱！\n3. 需先主觀判斷對象是否合適，不一定要交手過，但需確認是否為真人或本人\n4. 提供管理員被推薦者以下資訊\n　女生：LINE帳號(分享好友資訊)/一張清晰臉照/推薦理由/是否交手or見過面\n　男生：LINE帳號(分享好友資訊)/一張清晰臉照/推薦理由/是否交手or見過面，以及男生自行開發的女生清晰臉照一張，兩者均接受審核，審核通過才會一起進群\n5. 進群判斷標準 - 外在 / 觀念 / 審核評價\n6. 群組運作需要規範，不歡迎自我意識過強或不喜遵守規範的朋友\n\n【入群問題】\n1. 能否接受視訊1-3秒(只需露臉)\n2. 如何與介紹人認識?\n3. 你認知這是甚麼樣類型的群組?\n4. 為什麼想要加入這群組?\n5. 請問身高/體重/年齡/感情狀態/活動地區\n　(感情狀態只有 單身/有男女朋友/已婚)\n6. 過去開放式性經驗有哪些? \n    (一夜/床伴/多P/SM)\n7. 請提供三張照片\n　女生：生活/身材/裸露(確認照片尺度)\n　男生：生活/身材/老二(不遮掩可辨識長度)\n8. 未來若身邊有適合群組的朋友，是否願意介紹?\n9. 有甚麼問題想問?\n\n上述回答內容僅作為審核用, 不外傳外流, 避免衍伸法律問題. 管理員會視情況提問其他問題\n注意!!視訊完請刪除管理員好友，並關掉阻擋非好友傳訊功能，否則會收不到管理員訊息\n"</script>
+<script>
+const state = {
+  sections: [],
+  active: "規章總覽"
+};
+
+const el = {
+  categoryStrip: document.querySelector("#categoryStrip"),
+  overviewPage: document.querySelector("#overviewPage"),
+  detailPage: document.querySelector("#detailPage"),
+  searchPage: document.querySelector("#searchPage"),
+  detailTitle: document.querySelector("#detailTitle"),
+  ruleList: document.querySelector("#ruleList"),
+  searchInput: document.querySelector("#searchInput"),
+  searchTitle: document.querySelector("#searchTitle"),
+  searchResults: document.querySelector("#searchResults")
+};
+
+init();
+
+async function init() {
+  try {
+    const embedded = document.querySelector("#rulesData");
+    let rulesText;
+    if (embedded) {
+      rulesText = JSON.parse(embedded.textContent);
+    } else {
+      const response = await fetch("./rules.txt", { cache: "no-store" });
+      if (!response.ok) throw new Error("讀取規定失敗");
+      rulesText = await response.text();
+    }
+    state.sections = parseRules(rulesText);
+    renderCategories();
+    renderOverview();
+  } catch (error) {
+    document.querySelector(".board").innerHTML =
+      `<p class="empty">無法載入規定.txt：${escapeHtml(error.message)}</p>`;
+  }
+}
+
+function parseRules(text) {
+  const sections = [];
+  let current = null;
+  let buffer = [];
+
+  const flush = () => {
+    if (current && buffer.length) {
+      current.items.push(buffer.join("\n").trim());
+      buffer = [];
+    }
+  };
+
+  for (const raw of text.replaceAll("\r", "").split("\n")) {
+    const line = raw.trim();
+    const heading = line.match(/^【(.+?)】$/);
+    if (heading) {
+      flush();
+      current = { title: heading[1].trim(), items: [] };
+      sections.push(current);
+      continue;
+    }
+    if (!current) continue;
+    if (!line) {
+      flush();
+    } else if (buffer.length && isNewItem(line)) {
+      flush();
+      buffer.push(line);
+    } else {
+      buffer.push(line);
+    }
+  }
+  flush();
+  return sections.filter(section => section.items.length);
+}
+
+function isNewItem(line) {
+  return /^(\d+\.|\*|進入\s*:|離開\s*:|罰則：|小錯→|大錯→|目的：|做法：|女生：|男生：)/.test(line);
+}
+
+function renderCategories() {
+  const titles = ["規章總覽", ...state.sections.map(section => section.title)];
+  el.categoryStrip.innerHTML = titles.map(title =>
+    `<button class="category-button ${title === state.active ? "active" : ""}"
+      data-title="${escapeHtml(title)}">${escapeHtml(title)}</button>`
+  ).join("");
+
+  el.categoryStrip.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => openCategory(button.dataset.title));
+  });
+}
+
+function renderOverview() {
+  fillSummary("#noticeSummary", "特別注意", 3);
+  fillSummary("#rulesSummary", "群組規定", 5);
+  fillSummary("#introSummary", "自介相簿發布內容", 8);
+  fillSummary("#entrySummary", "群組進出方式", 3);
+}
+
+function fillSummary(selector, title, limit) {
+  const section = findSection(title);
+  const target = document.querySelector(selector);
+  if (!section || !target) return;
+  target.innerHTML = section.items.slice(0, limit)
+    .map(item => `<p>✓ ${escapeHtml(cleanNumber(item).replaceAll("\n", " "))}</p>`)
+    .join("");
+}
+
+function openCategory(title) {
+  state.active = title;
+  renderCategories();
+  el.searchInput.value = "";
+
+  if (title === "規章總覽") {
+    showPage("overview");
+  } else {
+    const section = findSection(title);
+    if (!section) return;
+    el.detailTitle.textContent = section.title;
+    el.ruleList.innerHTML = ruleCards(section.items);
+    showPage("detail");
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function ruleCards(items, category = "") {
+  if (!items.length) return `<p class="empty">沒有符合的內容</p>`;
+  return items.map((item, index) => `
+    <article class="rule-card">
+      <div class="rule-number">${index + 1}</div>
+      <div>
+        ${category ? `<div class="rule-category">${escapeHtml(category)}</div>` : ""}
+        <div class="rule-copy">${escapeHtml(cleanNumber(item))}</div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function runSearch(query) {
+  const keyword = query.trim().toLocaleLowerCase("zh-Hant");
+  if (!keyword) {
+    openCategory(state.active);
+    return;
+  }
+
+  const matches = [];
+  for (const section of state.sections) {
+    for (const item of section.items) {
+      if (item.toLocaleLowerCase("zh-Hant").includes(keyword)) {
+        matches.push({ item, category: section.title });
+      }
+    }
+  }
+
+  el.searchTitle.textContent = `「${query.trim()}」找到 ${matches.length} 項`;
+  el.searchResults.innerHTML = matches.length
+    ? matches.map((match, index) => `
+      <article class="rule-card">
+        <div class="rule-number">${index + 1}</div>
+        <div>
+          <div class="rule-category">${escapeHtml(match.category)}</div>
+          <div class="rule-copy">${escapeHtml(cleanNumber(match.item))}</div>
+        </div>
+      </article>`).join("")
+    : `<p class="empty">找不到符合的規定</p>`;
+  showPage("search");
+}
+
+function showPage(page) {
+  el.overviewPage.hidden = page !== "overview";
+  el.detailPage.hidden = page !== "detail";
+  el.searchPage.hidden = page !== "search";
+}
+
+function findSection(title) {
+  return state.sections.find(section => section.title === title);
+}
+
+function cleanNumber(text) {
+  return text.replace(/^\d+\.\s*/, "");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+let searchTimer;
+el.searchInput.addEventListener("input", event => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => runSearch(event.target.value), 160);
+});
+document.querySelector("#backButton").addEventListener("click", () => openCategory("規章總覽"));
+document.querySelector("#clearSearch").addEventListener("click", () => {
+  el.searchInput.value = "";
+  openCategory("規章總覽");
+});
+document.querySelector("#shareButton").addEventListener("click", sharePage);
+
+async function sharePage() {
+  const shareData = {
+    title: document.title,
+    text: "群組規章與自介須知",
+    url: location.href
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+      showShareStatus("已開啟分享選單");
+    } else {
+      await navigator.clipboard.writeText(location.href);
+      showShareStatus("網址已複製");
+    }
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      showShareStatus("請複製瀏覽器網址分享");
+    }
+  }
+}
+
+let shareStatusTimer;
+function showShareStatus(message) {
+  const status = document.querySelector("#shareStatus");
+  status.textContent = message;
+  status.classList.add("show");
+  clearTimeout(shareStatusTimer);
+  shareStatusTimer = setTimeout(() => status.classList.remove("show"), 2200);
+}
+
+</script>
+</body>
+</html>
