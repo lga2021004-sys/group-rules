@@ -34,7 +34,7 @@ body {
   background-size: 24px 24px;
 }
 
-button, input { font: inherit; }
+button, input, select, textarea { font: inherit; }
 
 .topbar {
   position: sticky;
@@ -298,6 +298,239 @@ button, input { font: inherit; }
 .rule-category { color: var(--teal); font-size: 13px; font-weight: 900; }
 .empty { padding: 50px 16px; text-align: center; font-size: 20px; font-weight: 800; color: #68777a; }
 
+.quiz-list,
+.intro-form {
+  display: grid;
+  gap: 14px;
+}
+
+.quiz-card,
+.intro-generator {
+  padding: 18px;
+  background: #fffef9;
+  border: 1px solid #d5d0c3;
+  border-radius: 18px;
+  box-shadow: 0 3px 8px #223c4220;
+}
+
+.quiz-card h3 {
+  margin: 0 0 14px;
+  color: var(--teal-dark);
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.45;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 54px;
+  padding: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+  background: #f4faf8;
+  border: 1px solid #bfd0c8;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.quiz-option:has(input:checked) {
+  color: white;
+  background: var(--teal);
+  border-color: var(--teal-dark);
+}
+
+.quiz-answer {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.quiz-answer p { margin: 5px 0; line-height: 1.5; }
+.quiz-answer.correct { background: #dff2e8; color: #155f38; }
+.quiz-answer.wrong { background: #fae1dd; color: #8c2f2a; }
+
+.quiz-actions,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 12px 18px;
+  font-weight: 900;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.primary-button {
+  color: white;
+  background: var(--teal);
+  border: 2px solid var(--teal-dark);
+}
+
+.secondary-button {
+  color: var(--teal-dark);
+  background: #fff8e8;
+  border: 2px solid var(--gold);
+}
+
+.quiz-result { margin-bottom: 14px; }
+
+.score-card {
+  display: grid;
+  gap: 5px;
+  padding: 18px;
+  text-align: center;
+  border-radius: 18px;
+  border: 2px solid;
+}
+
+.score-card p,
+.score-card span { margin: 0; font-weight: 900; }
+.score-card strong { font-size: clamp(36px, 7vw, 64px); line-height: 1; }
+.score-card.pass { color: #155f38; background: #dff2e8; border-color: #5ab77e; }
+.score-card.fail { color: #8c2f2a; background: #fae1dd; border-color: #d87b73; }
+
+.intro-generator {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.generator-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  color: white;
+  background: linear-gradient(#3a9ba6, var(--teal));
+  border-radius: 18px;
+}
+
+.generator-heading p,
+.generator-heading h3 { margin: 0; }
+.generator-heading p { opacity: .82; font-weight: 800; }
+.generator-heading h3 { font-size: clamp(22px, 3vw, 30px); }
+.generator-heading span { align-self: center; font-weight: 900; }
+
+.intro-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.intro-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--teal-dark);
+  font-weight: 900;
+}
+
+.intro-form label:nth-of-type(8),
+.intro-form .upload-field,
+.intro-form .form-actions,
+.intro-form .form-error {
+  grid-column: 1 / -1;
+}
+
+.intro-form input,
+.intro-form select,
+.intro-form textarea,
+.intro-output textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid #bfd0c8;
+  border-radius: 12px;
+  outline-color: var(--gold);
+}
+
+.upload-field span {
+  color: #607174;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.upload-field input[type="file"] {
+  padding: 10px;
+  background: #fff8e8;
+  border: 2px dashed var(--gold);
+}
+
+.form-error {
+  margin: 0;
+  padding: 12px 14px;
+  color: #8c2f2a;
+  font-weight: 900;
+  background: #fae1dd;
+  border-radius: 12px;
+}
+
+.intro-output {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: #f4faf8;
+  border: 1px solid #bfd0c8;
+  border-radius: 18px;
+}
+
+.intro-output canvas {
+  width: min(100%, 260px);
+  height: auto;
+  justify-self: center;
+  background: white;
+  border: 1px solid #d5d0c3;
+  border-radius: 18px;
+  box-shadow: 0 5px 14px #223c4220;
+  cursor: grab;
+  touch-action: none;
+}
+
+.intro-output canvas:active { cursor: grabbing; }
+
+.editor-hint,
+.editor-tools {
+  margin: 0;
+  color: var(--teal-dark);
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.editor-tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.intro-output textarea {
+  min-height: 180px;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
+.download-status {
+  margin: 0;
+  color: var(--teal-dark);
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+}
+
 footer {
   padding: 18px;
   text-align: center;
@@ -349,6 +582,12 @@ footer {
   .rule-card { grid-template-columns: 40px 1fr; gap: 10px; padding: 12px; }
   .rule-number { width: 38px; height: 38px; font-size: 17px; border-radius: 10px; }
   .rule-copy { font-size: 16px; line-height: 1.55; }
+  .quiz-card,
+  .intro-generator { padding: 13px; }
+  .quiz-options,
+  .intro-form { grid-template-columns: 1fr; }
+  .generator-heading { display: block; }
+  .generator-heading span { display: block; margin-top: 8px; }
 }
 
 </style>
@@ -438,15 +677,190 @@ footer {
       </div>
       <div class="rule-list" id="searchResults"></div>
     </section>
+
+    <section id="quizPage" hidden>
+      <div class="detail-heading">
+        <button id="shuffleQuiz" class="back-button" type="button">重新抽題</button>
+        <div>
+          <p>每次隨機 10 題，送出後才會顯示正確答案</p>
+          <h2>入群測驗</h2>
+        </div>
+      </div>
+      <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+      <div id="quizList" class="quiz-list"></div>
+      <div class="quiz-actions">
+        <button id="submitQuiz" class="primary-button" type="button">送出答案</button>
+      </div>
+    </section>
   </main>
 
   <footer>本頁重視互相尊重、隱私安全與良好互動</footer>
   <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
-  <script id="rulesData" type="application/json">"2026.01 群組規章\n\n【群組主旨】\n目的：認識可以發生關係的好朋友\n做法：採推薦制，聚集觀念與價值觀接近的成員\n\n【特別注意】\n以下動作請提前在群組對話告知，避免成員不理解狀況\n1. 暫離群組\n2. 拉舊人回群\n3. 變更／刪除自介（第一次上自介不用告知）\n\n【群組規定】\n1. 新人加入群組後，24小時內請完成自介\n2. 欲私下聊天，務必在群組對話中確認對方同意加好友（自介有寫私加不用問才不用問，不然一律要問）\n3. 注意隱私／禮貌／安全，嚴禁槍砲／彈藥／毒品\n4. 群組官方活動限定系列群組成員參加，不接受刪退或違規者，但主辦者保留邀請的最後權利\n5. 請善用記事本公告統計活動，活動過期請刪除，廣告文上架七天為限\n6. 處理問題勿意氣用事，請冷靜思考並尋求協助\n7. 非當事者請勿八卦，請盡量取得雙方說法平衡事實\n8. 若被請離群組，請保持風度好聚好散\n9. 群組依賴人員自主管理，目前成員都珍惜這裡，群組相對安全，數十年來未發生重大事故\n10. 管理員僅負責維持群組運作，不處理私事，有問題請備妥證據投訴（人證物證對話均可）\n11. 誤刪地區自介相簿者，禁止入群三個月，並請帶業績回來\n12. 每年均會更新搬到新群組，保持成員熱度\n13. @All 功能使用範圍：管理員 or 攸關群組利益 or 緊急人身安全事件\n14. 專案進群朋友，完成專案任務前不得私加好友\n\n【群組進出方式】\n進入：\n1. 新人 → 管理員審核通過\n2. 舊人 → 群組對話內告知後邀請\n（無自介或被管理員請離的視同新人）\n\n離開：\n1. 對群組無貢獻\n（未推薦朋友／不聊天／不參與活動／無特殊功能等等...）\n2. 違反規定（最多三次即永久禁止回群）\n3. 頻率不合（由管理員主觀認定）\n4. 找人頭進群\n5. 30天內未發言，列為優先請離對象\n\n罰則：（回來均須帶業績）\n小錯 → 請離 1～30 天\n（私加／酒醉失控／無禮 ...）\n大錯 → 請離 30～180 天\n（蓄意無套／PUA／欺騙感情...）\n\n【自介相簿發布內容】\n1. 暱稱：（需與 LINE 名稱相同）\n2. 身高／體重／年齡：\n3. 尺寸：（長度／罩杯）\n4. 感情狀態：（單身／有男女朋友／已婚，禁止填寫非單）\n5. 活動地區：（居住地或活動地）\n6. 想說的話：\n7. 介紹人：\n8. 2 張照片（請維持 LINE 頭貼或自介相簿有一張清晰臉照）\n\n以上為必要資訊，請將上述內容製成一張照片上傳到分區相簿（可去掉標題 title，較為美觀）\n可用記事本截圖或美圖秀秀製作，僅能放一個地區\n製作自介內容時，請考慮自身風險承受程度\n\n【介紹朋友入群注意事項】\n1. 請勿直接提供管理員帳號給對方\n2. 勿提前告知管理員帳號與群組名稱！\n3. 需先主觀判斷對象是否合適，不一定要交手過，但需確認是否為真人或本人\n4. 提供管理員被推薦者以下資訊：\n女生：LINE 帳號（分享好友資訊）／一張清晰臉照／推薦理由／是否交手 or 見過面\n男生：LINE 帳號（分享好友資訊）／一張清晰臉照／推薦理由／是否交手 or 見過面／男生自行開發的女生清晰臉照一張\n兩者均接受審核，審核通過才會一起進群\n5. 進群判斷標準：外在／觀念／審核評價\n6. 群組運作需要規範，不歡迎自我意識過強或不喜遵守規範的朋友\n"</script>
+  <script id="rulesData" type="application/json">"2026.01 群組規章\n\n【群組主旨】\n目的：認識可以發生關係的好朋友\n做法：採推薦制，聚集觀念與價值觀接近的成員\n\n【特別注意】\n以下動作請提前在群組對話告知，避免成員不理解狀況\n1. 暫離群組\n2. 拉舊人回群\n3. 變更／刪除自介（第一次上自介不用告知）\n\n【群組規定】\n1. 新人加入群組後，24小時內請完成自介\n2. 欲私下聊天，務必在群組對話中確認對方同意加好友（自介有寫私加不用問才不用問，不然一律要問）\n3. 注意隱私／禮貌／安全，嚴禁槍砲／彈藥／毒品\n4. 群組官方活動限定系列群組成員參加，不接受刪退或違規者，但主辦者保留邀請的最後權利\n5. 請善用記事本公告統計活動，活動過期請刪除，廣告文上架七天為限\n6. 處理問題勿意氣用事，請冷靜思考並尋求協助\n7. 非當事者請勿八卦，請盡量取得雙方說法平衡事實\n8. 若被請離群組，請保持風度好聚好散\n9. 群組依賴人員自主管理，目前成員都珍惜這裡，群組相對安全，數十年來未發生重大事故\n10. 管理員僅負責維持群組運作，不處理私事，有問題請備妥證據投訴（人證物證對話均可）\n11. 誤刪地區自介相簿者，禁止入群三個月，並請帶業績回來\n12. 每年均會更新搬到新群組，保持成員熱度\n13. @All 功能使用範圍：管理員 or 攸關群組利益 or 緊急人身安全事件\n14. 專案進群朋友，完成專案任務前不得私加好友\n\n【群組進出方式】\n進入：\n1. 新人 → 管理員審核通過\n2. 舊人 → 群組對話內告知後邀請\n（無自介或被管理員請離的視同新人）\n\n離開：\n1. 對群組無貢獻\n（未推薦朋友／不聊天／不參與活動／無特殊功能等等...）\n2. 違反規定（最多三次即永久禁止回群）\n3. 頻率不合（由管理員主觀認定）\n4. 找人頭進群\n5. 60天內未發言，列為優先請離對象\n\n罰則：（回來均須帶業績）\n小錯 → 請離 1～30 天\n（私加／酒醉失控／無禮 ...）\n大錯 → 請離 30～180 天\n（蓄意無套／PUA／欺騙感情...）\n\n【自介相簿發布內容】\n1. 暱稱：（需與 LINE 名稱相同）\n2. 身高／體重／年齡：\n3. 尺寸：（長度／罩杯）\n4. 感情狀態：（單身／有男女朋友／已婚，禁止填寫非單）\n5. 活動地區：（居住地或活動地）\n6. 想說的話：\n7. 介紹人：\n8. 2 張照片（請維持 LINE 頭貼或自介相簿有一張清晰臉照）\n\n以上為必要資訊，請將上述內容製成一張照片上傳到分區相簿（可去掉標題 title，較為美觀）\n可用記事本截圖或美圖秀秀製作，僅能放一個地區\n製作自介內容時，請考慮自身風險承受程度\n\n【介紹朋友入群注意事項】\n1. 請勿直接提供管理員帳號給對方\n2. 勿提前告知管理員帳號與群組名稱！\n3. 需先主觀判斷對象是否合適，不一定要交手過，但需確認是否為真人或本人\n4. 提供管理員被推薦者以下資訊：\n女生：LINE 帳號（分享好友資訊）／一張清晰臉照／推薦理由／是否交手 or 見過面\n男生：LINE 帳號（分享好友資訊）／一張清晰臉照／推薦理由／是否交手 or 見過面／男生自行開發的女生清晰臉照一張\n兩者均接受審核，審核通過才會一起進群\n5. 進群判斷標準：外在／觀念／審核評價\n6. 群組運作需要規範，不歡迎自我意識過強或不喜遵守規範的朋友\n"</script>
 <script>
+const OVERVIEW_TITLE = "規章總覽";
+const QUIZ_TITLE = "入群測驗";
+const INTRO_TITLE = "自介相簿發布內容";
+const PASS_SCORE = 8;
+
+const quizQuestions = [
+  {
+    question: "新人加入群組後，應在多久內完成自介？",
+    options: ["立即完成", "24 小時內", "3 天內", "7 天內"],
+    answer: "24 小時內",
+    explanation: "核心規定要求新人加入後 24 小時內完成自介。"
+  },
+  {
+    question: "欲私下聊天或加好友時，原則上應怎麼做？",
+    options: ["直接私訊即可", "只要看過自介就可以", "在群組對話中確認對方同意", "請朋友代為詢問"],
+    answer: "在群組對話中確認對方同意",
+    explanation: "私聊需先在群組確認對方同意，除非自介明確寫私加不用問。"
+  },
+  {
+    question: "下列哪一種行為最符合群組對隱私、安全與禮貌的要求？",
+    options: ["未經同意轉傳他人照片或對話", "涉及槍砲、彈藥、毒品等違禁內容", "尊重隱私並避免危險或違法內容", "酒後失控仍持續騷擾群友"],
+    answer: "尊重隱私並避免危險或違法內容",
+    explanation: "核心規定要求注意隱私、禮貌、安全，並嚴禁槍砲、彈藥、毒品。"
+  },
+  {
+    question: "暫離群組前應該怎麼做？",
+    options: ["直接離開即可", "私下告訴一位朋友即可", "提前在群組對話告知", "等管理員詢問"],
+    answer: "提前在群組對話告知",
+    explanation: "特別注意要求暫離群組需提前告知。"
+  },
+  {
+    question: "拉舊人回群前應該怎麼做？",
+    options: ["直接邀請回來", "提前在群組對話告知", "只要對方曾經在群內就可以", "不需要任何說明"],
+    answer: "提前在群組對話告知",
+    explanation: "拉舊人回群需提前告知，避免成員不理解狀況。"
+  },
+  {
+    question: "廣告或活動文章原則上最多上架多久？",
+    options: ["1 天", "3 天", "7 天", "30 天"],
+    answer: "7 天",
+    explanation: "互動準則中提到廣告／活動七天為限。"
+  },
+  {
+    question: "遇到問題時，群組希望成員採取哪種態度？",
+    options: ["公開吵架", "冷靜處理", "立刻截圖外傳", "找非當事者評理"],
+    answer: "冷靜處理",
+    explanation: "互動準則要求冷靜處理問題。"
+  },
+  {
+    question: "非當事者遇到他人爭議時，應避免什麼？",
+    options: ["八卦或擴散", "閱讀公告", "參加活動", "更新自介"],
+    answer: "八卦或擴散",
+    explanation: "互動準則提到非當事者不八卦。"
+  },
+  {
+    question: "被請離群組時，規章希望成員怎麼做？",
+    options: ["保持風度", "到處抱怨", "找其他人吵架", "馬上開新群"],
+    answer: "保持風度",
+    explanation: "互動準則提到被離群請保持風度。"
+  },
+  {
+    question: "新人進入群組的方式是什麼？",
+    options: ["自行加入", "管理員審核通過", "任一成員直接邀請", "留言報名即可"],
+    answer: "管理員審核通過",
+    explanation: "群組進出方式寫明新人需經管理員審核通過。"
+  },
+  {
+    question: "舊人回群的方式是什麼？",
+    options: ["直接點連結加入", "群組對話內告知後邀請", "不需告知即可加入", "只能重新填自介"],
+    answer: "群組對話內告知後邀請",
+    explanation: "舊人回群需在群組對話內告知後邀請。"
+  },
+  {
+    question: "無自介或曾被管理員請離者，回群時視同什麼？",
+    options: ["舊人", "管理員", "新人", "特邀成員"],
+    answer: "新人",
+    explanation: "規章寫明無自介或被管理員請離者視同新人。"
+  },
+  {
+    question: "下列哪一項可能成為被請離原因？",
+    options: ["不推薦朋友、不聊天、不參與活動", "完成自介", "遵守公告", "活動前告知"],
+    answer: "不推薦朋友、不聊天、不參與活動",
+    explanation: "對群組無貢獻可能被請離。"
+  },
+  {
+    question: "違反規定最多幾次可能永久禁止回群？",
+    options: ["1 次", "2 次", "3 次", "5 次"],
+    answer: "3 次",
+    explanation: "離開條款寫明違反規定最多三次即永久禁止回群。"
+  },
+  {
+    question: "60 天內未發言者會被列為什麼？",
+    options: ["優先請離對象", "活動優先邀請", "管理員候選", "無影響"],
+    answer: "優先請離對象",
+    explanation: "60 天內未發言會列為優先請離對象。"
+  },
+  {
+    question: "小錯的處理時間大約是？",
+    options: ["請離 1～30 天", "請離 30～180 天", "永久禁止", "不處理"],
+    answer: "請離 1～30 天",
+    explanation: "罰則中小錯為請離 1～30 天。"
+  },
+  {
+    question: "大錯的處理時間大約是？",
+    options: ["請離 1～7 天", "請離 1～30 天", "請離 30～180 天", "只口頭提醒"],
+    answer: "請離 30～180 天",
+    explanation: "罰則中大錯為請離 30～180 天。"
+  },
+  {
+    question: "回群時，罰則備註提到通常需要什麼？",
+    options: ["帶業績", "換暱稱", "刪除照片", "重新辦帳號"],
+    answer: "帶業績",
+    explanation: "罰則提到回來均須帶業績。"
+  },
+  {
+    question: "自介相簿中的暱稱要求是什麼？",
+    options: ["可隨便取", "需與 LINE 名稱相同", "只能用英文", "不可填暱稱"],
+    answer: "需與 LINE 名稱相同",
+    explanation: "自介格式要求暱稱需與 LINE 名稱相同。"
+  },
+  {
+    question: "自介相簿需提供哪一類基本資料？",
+    options: ["身高、體重、年齡", "身分證字號", "公司地址", "銀行帳戶"],
+    answer: "身高、體重、年齡",
+    explanation: "自介格式列出身高／體重／年齡。"
+  },
+  {
+    question: "自介中的感情狀態應如何填寫？",
+    options: ["可以亂填", "禁止填寫非單", "只能填秘密", "不需要填"],
+    answer: "禁止填寫非單",
+    explanation: "格式要求填單身／有男女朋友／已婚，並禁止填寫非單。"
+  },
+  {
+    question: "自介照片要求是什麼？",
+    options: ["不需要照片", "只放風景照即可", "2 張照片，且需有清晰臉照", "只能放一張"],
+    answer: "2 張照片，且需有清晰臉照",
+    explanation: "自介格式要求 2 張照片，並維持 LINE 頭貼或相簿有清晰臉照。"
+  },
+  {
+    question: "介紹朋友入群時，介紹人應注意什麼？",
+    options: ["不需負責", "製作圖上傳到分區相簿，並考量自身風險", "只要私訊管理員即可", "朋友進群後就與介紹人無關"],
+    answer: "製作圖上傳到分區相簿，並考量自身風險",
+    explanation: "介紹人需製作圖上傳到分區相簿，並考量自身風險。"
+  },
+  {
+    question: "群組官方活動原則上限定誰參加？",
+    options: ["任何路人", "系列群組成員", "未加入群組的人", "只限管理員"],
+    answer: "系列群組成員",
+    explanation: "核心規定提到官方活動限定系列群組成員參加。"
+  },
+  {
+    question: "群組的主旨較接近下列哪一項？",
+    options: ["隨機廣告群", "認識可以發生關係的好朋友", "工作求職群", "單純新聞轉發群"],
+    answer: "認識可以發生關係的好朋友",
+    explanation: "群組宗旨寫明認識可以發生關係的好朋友。"
+  }
+];
+
 const state = {
   sections: [],
-  active: "規章總覽"
+  active: OVERVIEW_TITLE,
+  quiz: [],
+  introEditor: null
 };
 
 const el = {
@@ -454,11 +868,14 @@ const el = {
   overviewPage: document.querySelector("#overviewPage"),
   detailPage: document.querySelector("#detailPage"),
   searchPage: document.querySelector("#searchPage"),
+  quizPage: document.querySelector("#quizPage"),
   detailTitle: document.querySelector("#detailTitle"),
   ruleList: document.querySelector("#ruleList"),
   searchInput: document.querySelector("#searchInput"),
   searchTitle: document.querySelector("#searchTitle"),
-  searchResults: document.querySelector("#searchResults")
+  searchResults: document.querySelector("#searchResults"),
+  quizList: document.querySelector("#quizList"),
+  quizResult: document.querySelector("#quizResult")
 };
 
 init();
@@ -477,6 +894,7 @@ async function init() {
     state.sections = parseRules(rulesText);
     renderCategories();
     renderOverview();
+    drawQuiz();
   } catch (error) {
     document.querySelector(".board").innerHTML =
       `<p class="empty">無法載入規定.txt：${escapeHtml(error.message)}</p>`;
@@ -526,7 +944,7 @@ function isNewItem(line, sectionTitle = "") {
 }
 
 function renderCategories() {
-  const titles = ["規章總覽", ...state.sections.map(section => section.title)];
+  const titles = [OVERVIEW_TITLE, ...state.sections.map(section => section.title), QUIZ_TITLE];
   el.categoryStrip.innerHTML = titles.map(title =>
     `<button class="category-button ${title === state.active ? "active" : ""}"
       data-title="${escapeHtml(title)}">${escapeHtml(title)}</button>`
@@ -540,7 +958,7 @@ function renderCategories() {
 function renderOverview() {
   fillSummary("#noticeSummary", "特別注意", 3);
   fillSummary("#rulesSummary", "群組規定", 5);
-  fillSummary("#introSummary", "自介相簿發布內容", 8);
+  fillSummary("#introSummary", INTRO_TITLE, 8);
   fillSummary("#entrySummary", "群組進出方式", 99);
 }
 
@@ -558,13 +976,16 @@ function openCategory(title) {
   renderCategories();
   el.searchInput.value = "";
 
-  if (title === "規章總覽") {
+  if (title === OVERVIEW_TITLE) {
     showPage("overview");
+  } else if (title === QUIZ_TITLE) {
+    showPage("quiz");
   } else {
     const section = findSection(title);
     if (!section) return;
     el.detailTitle.textContent = section.title;
-    el.ruleList.innerHTML = ruleCards(section.items);
+    el.ruleList.innerHTML = ruleCards(section.items) + (section.title === INTRO_TITLE ? introGeneratorMarkup() : "");
+    if (section.title === INTRO_TITLE) bindIntroGenerator();
     showPage("detail");
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -581,6 +1002,593 @@ function ruleCards(items, category = "") {
       </div>
     </article>
   `).join("");
+}
+
+function drawQuiz() {
+  state.quiz = shuffle(quizQuestions).slice(0, 10).map(question => ({
+    ...question,
+    options: shuffle(question.options)
+  }));
+  renderQuiz(false);
+}
+
+function renderQuiz(showAnswers) {
+  el.quizResult.innerHTML = "";
+  el.quizList.innerHTML = state.quiz.map((item, index) => `
+    <article class="quiz-card" data-question-index="${index}">
+      <h3>${index + 1}. ${escapeHtml(item.question)}</h3>
+      <div class="quiz-options">
+        ${item.options.map(option => {
+          const id = `quiz-${index}-${slug(option)}`;
+          return `
+            <label class="quiz-option">
+              <input type="radio" name="quiz-${index}" value="${escapeHtml(option)}" id="${id}">
+              <span>${escapeHtml(option)}</span>
+            </label>
+          `;
+        }).join("")}
+      </div>
+      ${showAnswers ? answerMarkup(item, index) : ""}
+    </article>
+  `).join("");
+}
+
+function answerMarkup(item, index) {
+  const selected = getSelectedAnswer(index);
+  const isCorrect = selected === item.answer;
+  return `
+    <div class="quiz-answer ${isCorrect ? "correct" : "wrong"}">
+      <b>${isCorrect ? "答對" : "答錯"}</b>
+      <p>你的答案：${escapeHtml(selected || "未作答")}</p>
+      <p>正確答案：${escapeHtml(item.answer)}</p>
+      <p>${escapeHtml(item.explanation)}</p>
+    </div>
+  `;
+}
+
+function submitQuiz() {
+  const answers = state.quiz.map((_, index) => getSelectedAnswer(index));
+  if (answers.some(answer => !answer)) {
+    el.quizResult.innerHTML = `<p class="form-error">還有題目尚未作答，完成 10 題後再送出。</p>`;
+    return;
+  }
+  const score = state.quiz.reduce((total, item, index) => total + (answers[index] === item.answer ? 1 : 0), 0);
+  renderQuiz(true);
+  answers.forEach((answer, index) => {
+    const input = document.querySelector(`input[name="quiz-${index}"][value="${cssEscape(answer)}"]`);
+    if (input) input.checked = true;
+  });
+  el.quizResult.innerHTML = `
+    <div class="score-card ${score >= PASS_SCORE ? "pass" : "fail"}">
+      <p>你的分數</p>
+      <strong>${score} / ${state.quiz.length}</strong>
+      <span>${score >= PASS_SCORE ? "通過，請將結果給管理員確認" : "未通過，請重新閱讀規章後再測一次"}</span>
+    </div>
+  `;
+  window.scrollTo({ top: el.quizResult.offsetTop - 120, behavior: "smooth" });
+}
+
+function getSelectedAnswer(index) {
+  const checked = document.querySelector(`input[name="quiz-${index}"]:checked`);
+  return checked ? checked.value : "";
+}
+
+function introGeneratorMarkup() {
+  return `
+    <section class="intro-generator">
+      <div class="generator-heading">
+        <div>
+          <p>試作功能</p>
+          <h3>自介產生器</h3>
+        </div>
+        <span>填完後產生圖片 + 文字介紹</span>
+      </div>
+      <form id="introForm" class="intro-form">
+        <label>暱稱（需與 LINE 名稱相同）*
+          <input name="nickname" required placeholder="例：小明">
+        </label>
+        <label>身高 *
+          <input name="height" required inputmode="numeric" placeholder="例：170">
+        </label>
+        <label>體重 *
+          <input name="weight" required inputmode="numeric" placeholder="例：60">
+        </label>
+        <label>年齡 *
+          <input name="age" required inputmode="numeric" placeholder="例：28">
+        </label>
+        <label>尺寸 *
+          <input name="size" required placeholder="例：長度 / 罩杯">
+        </label>
+        <label>感情狀態 *
+          <select name="relationship" required>
+            <option value="">請選擇</option>
+            <option>單身</option>
+            <option>有男友</option>
+            <option>有女友</option>
+            <option>已婚</option>
+          </select>
+        </label>
+        <label>活動區域
+          <input name="area" placeholder="例：台北 / 桃園">
+        </label>
+        <label>想說的話
+          <textarea name="message" rows="3" placeholder="例：私加要問，聊天請有禮貌"></textarea>
+        </label>
+        <label>介紹人 *
+          <input name="referrer" required placeholder="例：OO 推薦">
+        </label>
+        <label class="upload-field">上傳圖片 *
+          <input name="photo" type="file" accept="image/*" multiple required>
+          <span>可自由選擇多張照片，系統會自動拼成一張圖；圖片只會在本機產生，不會上傳。</span>
+        </label>
+        <div class="form-actions">
+          <button class="primary-button" type="submit">完成</button>
+          <button class="secondary-button" type="reset">清除</button>
+        </div>
+        <p id="introError" class="form-error" hidden></p>
+      </form>
+      <div class="intro-output" id="introOutput" hidden>
+        <p class="editor-hint">可直接拖曳照片調整裁切位置，也可以拖曳文字到想放的位置。</p>
+        <canvas id="introCanvas" width="1080" height="1080" aria-label="產生的自介圖片"></canvas>
+        <div class="editor-tools">
+          <button id="selectPrevPhoto" class="secondary-button" type="button">上一張照片</button>
+          <span id="selectedPhotoStatus">尚未選擇照片</span>
+          <button id="selectNextPhoto" class="secondary-button" type="button">下一張照片</button>
+          <button id="cycleLayout" class="secondary-button" type="button">切換排列</button>
+        </div>
+        <button id="downloadIntro" class="secondary-button" type="button">下載圖片</button>
+        <p id="downloadStatus" class="download-status" aria-live="polite"></p>
+      </div>
+    </section>
+  `;
+}
+
+function bindIntroGenerator() {
+  const form = document.querySelector("#introForm");
+  const error = document.querySelector("#introError");
+  const output = document.querySelector("#introOutput");
+  const canvas = document.querySelector("#introCanvas");
+  const downloadButton = document.querySelector("#downloadIntro");
+  const downloadStatus = document.querySelector("#downloadStatus");
+  const selectedPhotoStatus = document.querySelector("#selectedPhotoStatus");
+  const prevPhotoButton = document.querySelector("#selectPrevPhoto");
+  const nextPhotoButton = document.querySelector("#selectNextPhoto");
+  const cycleLayoutButton = document.querySelector("#cycleLayout");
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    const required = ["nickname", "height", "weight", "age", "size", "relationship", "referrer"];
+    const missing = required.filter(key => !String(data[key] || "").trim());
+    const photos = [...form.elements.photo.files];
+    if (missing.length || !photos.length) {
+      error.hidden = false;
+      error.textContent = "請填完必填欄位並選擇圖片後再按完成。";
+      return;
+    }
+    error.hidden = true;
+    const images = await Promise.all(photos.map(loadImage));
+    state.introEditor = createIntroEditor(canvas, data, images, selectedPhotoStatus);
+    renderIntroEditor();
+    output.hidden = false;
+    output.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  form.addEventListener("reset", () => {
+    output.hidden = true;
+    error.hidden = true;
+    state.introEditor = null;
+  });
+
+  downloadButton.addEventListener("click", () => {
+    canvas.toBlob(blob => {
+      if (!blob) {
+        downloadStatus.textContent = "下載失敗，請重新產生圖片後再試一次。";
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.download = "自介.png";
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      downloadStatus.textContent = "已送出下載，如果瀏覽器有詢問請選擇允許。";
+    }, "image/png");
+  });
+
+  prevPhotoButton.addEventListener("click", () => selectIntroPhoto(-1));
+  nextPhotoButton.addEventListener("click", () => selectIntroPhoto(1));
+  cycleLayoutButton.addEventListener("click", cycleIntroLayout);
+  bindCanvasDrag(canvas);
+}
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      URL.revokeObjectURL(image.src);
+      resolve(image);
+    };
+    image.onerror = () => reject(new Error("圖片讀取失敗，請重新選擇圖片"));
+    image.src = URL.createObjectURL(file);
+  });
+}
+
+function createIntroEditor(canvas, data, images, statusEl) {
+  const layoutIndex = 0;
+  const cells = layoutPhotoCells(images, canvas.width, canvas.height, layoutIndex);
+  const textBlock = getTextBlock("bottom-left", canvas.width, canvas.height);
+  return {
+    canvas,
+    data,
+    images,
+    layoutIndex,
+    cells,
+    selectedIndex: 0,
+    statusEl,
+    text: {
+      x: textBlock.x,
+      y: textBlock.y,
+      align: textBlock.align,
+      maxWidth: 760
+    },
+    drag: null
+  };
+}
+
+function renderIntroEditor() {
+  const editor = state.introEditor;
+  if (!editor) return;
+  drawIntroCanvas(editor.canvas, editor);
+  updateSelectedPhotoStatus();
+}
+
+function drawIntroCanvas(canvas, editor) {
+  const { data, images, cells, selectedIndex, text } = editor;
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#111111";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawPhotoCollage(ctx, images, cells, selectedIndex);
+
+  const line1 = `${data.nickname} / ${data.referrer}`;
+  const line2 = [
+    data.height,
+    data.weight,
+    data.age,
+    data.size,
+    data.relationship,
+    data.area || ""
+  ].filter(Boolean).join(" / ");
+  const line3 = data.message || "";
+
+  const textBlock = {
+    ...getTextBlockFromPoint(text.x, text.y, text.align, text.maxWidth, canvas.width, canvas.height),
+    width: canvas.width
+  };
+  drawTextScrim(ctx, textBlock);
+  ctx.textAlign = text.align;
+  ctx.fillStyle = "#ffffff";
+  ctx.shadowColor = "rgba(0, 0, 0, .72)";
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 3;
+  ctx.font = '900 42px "Microsoft JhengHei", sans-serif';
+  wrapCanvasText(ctx, line1, text.x, text.y, text.maxWidth, 48, 1, text.align);
+  ctx.font = '900 38px "Microsoft JhengHei", sans-serif';
+  wrapCanvasText(ctx, line2, text.x, text.y + 54, text.maxWidth, 44, 2, text.align);
+  if (line3) {
+    ctx.font = '800 30px "Microsoft JhengHei", sans-serif';
+    wrapCanvasText(ctx, line3, text.x, text.y + 104, text.maxWidth, 36, 1, text.align);
+  }
+  ctx.shadowColor = "transparent";
+}
+
+function getTextBlock(position, width, height) {
+  const margin = 38;
+  const maxWidth = width - margin * 2;
+  const isTop = position.startsWith("top");
+  const isCenter = position.endsWith("center");
+  const isRight = position.endsWith("right");
+  return {
+    align: isCenter ? "center" : isRight ? "right" : "left",
+    x: isCenter ? width / 2 : isRight ? width - margin : margin,
+    y: isTop ? 78 : height - 152,
+    width,
+    maxWidth,
+    scrimY: isTop ? 0 : height * .58,
+    scrimHeight: height * .42,
+    scrimDirection: isTop ? "top" : "bottom"
+  };
+}
+
+function getTextBlockFromPoint(x, y, align, maxWidth, width, height) {
+  const isTop = y < height / 2;
+  return {
+    x,
+    y,
+    align,
+    maxWidth,
+    width,
+    scrimY: isTop ? 0 : height * .58,
+    scrimHeight: height * .42,
+    scrimDirection: isTop ? "top" : "bottom"
+  };
+}
+
+function layoutPhotoCells(images, width, height, layoutIndex = 0) {
+  const count = images.length;
+  if (count === 1) {
+    return [{ x: 0, y: 0, width, height, offsetX: 0, offsetY: 0 }];
+  }
+  if (count === 2) {
+    return layoutIndex % 2 === 0
+      ? [
+          { x: 0, y: 0, width: width / 2, height, offsetX: 0, offsetY: 0 },
+          { x: width / 2, y: 0, width: width / 2, height, offsetX: 0, offsetY: 0 }
+        ]
+      : [
+          { x: 0, y: 0, width, height: height / 2, offsetX: 0, offsetY: 0 },
+          { x: 0, y: height / 2, width, height: height / 2, offsetX: 0, offsetY: 0 }
+        ];
+  }
+  if (count === 3) {
+    const layouts = [
+      [
+        { x: 0, y: 0, width: width / 2, height, offsetX: 0, offsetY: 0 },
+        { x: width / 2, y: 0, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+        { x: width / 2, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 }
+      ],
+      [
+        { x: 0, y: 0, width, height: height / 2, offsetX: 0, offsetY: 0 },
+        { x: 0, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+        { x: width / 2, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 }
+      ],
+      [
+        { x: 0, y: 0, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+        { x: 0, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+        { x: width / 2, y: 0, width: width / 2, height, offsetX: 0, offsetY: 0 }
+      ]
+    ];
+    return layouts[layoutIndex % layouts.length];
+  }
+  if (count === 4) {
+    return [
+      { x: 0, y: 0, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+      { x: width / 2, y: 0, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+      { x: 0, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 },
+      { x: width / 2, y: height / 2, width: width / 2, height: height / 2, offsetX: 0, offsetY: 0 }
+    ];
+  }
+
+  const columns = count <= 1 ? 1 : count === 2 ? 2 : Math.ceil(Math.sqrt(count));
+  const rows = Math.ceil(count / columns);
+  const cellWidth = width / columns;
+  const cellHeight = height / rows;
+
+  return images.map((image, index) => {
+    const column = index % columns;
+    const row = Math.floor(index / columns);
+    return {
+      x: column * cellWidth,
+      y: row * cellHeight,
+      width: cellWidth,
+      height: cellHeight,
+      offsetX: 0,
+      offsetY: 0
+    };
+  });
+}
+
+function drawPhotoCollage(ctx, images, cells, selectedIndex) {
+  images.forEach((image, index) => {
+    const cell = cells[index];
+    drawCoverImage(ctx, image, cell.x, cell.y, cell.width, cell.height, cell.offsetX, cell.offsetY);
+    if (index === selectedIndex) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(255, 255, 255, .9)";
+      ctx.lineWidth = 8;
+      ctx.strokeRect(cell.x + 4, cell.y + 4, cell.width - 8, cell.height - 8);
+      ctx.restore();
+    }
+  });
+}
+
+function drawTextScrim(ctx, block) {
+  const isTop = block.scrimDirection === "top";
+  const y1 = block.scrimY;
+  const y2 = block.scrimY + block.scrimHeight;
+  const gradient = ctx.createLinearGradient(0, y1, 0, y2);
+  gradient.addColorStop(0, isTop ? "rgba(0, 0, 0, .62)" : "rgba(0, 0, 0, 0)");
+  gradient.addColorStop(.58, "rgba(0, 0, 0, .28)");
+  gradient.addColorStop(1, isTop ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, .62)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, block.scrimY, block.width, block.scrimHeight);
+}
+
+function drawCoverImage(ctx, image, x, y, width, height, offsetX = 0, offsetY = 0) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.clip();
+
+  const imageRatio = image.width / image.height;
+  const boxRatio = width / height;
+  let drawWidth = width;
+  let drawHeight = height;
+  let drawX = x;
+  let drawY = y;
+
+  if (imageRatio > boxRatio) {
+    drawHeight = height;
+    drawWidth = height * imageRatio;
+    const maxOffset = (drawWidth - width) / 2;
+    drawX = x - maxOffset + clamp(offsetX, -maxOffset, maxOffset);
+  } else {
+    drawWidth = width;
+    drawHeight = width / imageRatio;
+    const maxOffset = (drawHeight - height) / 2;
+    drawY = y - maxOffset + clamp(offsetY, -maxOffset, maxOffset);
+  }
+
+  ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight);
+  ctx.restore();
+}
+
+function bindCanvasDrag(canvas) {
+  canvas.addEventListener("pointerdown", event => {
+    const editor = state.introEditor;
+    if (!editor) return;
+    const point = canvasPoint(canvas, event);
+    const hitText = isPointInTextArea(point, editor);
+    editor.drag = {
+      type: hitText ? "text" : "photo",
+      startX: point.x,
+      startY: point.y,
+      currentX: point.x,
+      currentY: point.y,
+      textX: editor.text.x,
+      textY: editor.text.y,
+      photoX: editor.cells[editor.selectedIndex]?.offsetX || 0,
+      photoY: editor.cells[editor.selectedIndex]?.offsetY || 0
+    };
+    if (!hitText) {
+      const hitIndex = editor.cells.findIndex(cell =>
+        point.x >= cell.x && point.x <= cell.x + cell.width &&
+        point.y >= cell.y && point.y <= cell.y + cell.height
+      );
+      if (hitIndex >= 0) editor.selectedIndex = hitIndex;
+    }
+    canvas.setPointerCapture(event.pointerId);
+    renderIntroEditor();
+  });
+
+  canvas.addEventListener("pointermove", event => {
+    const editor = state.introEditor;
+    if (!editor || !editor.drag) return;
+    const point = canvasPoint(canvas, event);
+    const dx = point.x - editor.drag.startX;
+    const dy = point.y - editor.drag.startY;
+    editor.drag.currentX = point.x;
+    editor.drag.currentY = point.y;
+    if (editor.drag.type === "text") {
+      editor.text.x = clamp(editor.drag.textX + dx, 38, canvas.width - 38);
+      editor.text.y = clamp(editor.drag.textY + dy, 62, canvas.height - 48);
+    } else {
+      const cell = editor.cells[editor.selectedIndex];
+      cell.offsetX = editor.drag.photoX + dx;
+      cell.offsetY = editor.drag.photoY + dy;
+    }
+    renderIntroEditor();
+  });
+
+  canvas.addEventListener("pointerup", () => {
+    if (state.introEditor) finishCanvasDrag();
+  });
+
+  canvas.addEventListener("pointercancel", () => {
+    if (state.introEditor) state.introEditor.drag = null;
+  });
+}
+
+function canvasPoint(canvas, event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (event.clientX - rect.left) * (canvas.width / rect.width),
+    y: (event.clientY - rect.top) * (canvas.height / rect.height)
+  };
+}
+
+function isPointInTextArea(point, editor) {
+  return point.y >= editor.text.y - 56 &&
+    point.y <= editor.text.y + 138 &&
+    point.x >= 0 &&
+    point.x <= editor.canvas.width;
+}
+
+function selectIntroPhoto(delta) {
+  const editor = state.introEditor;
+  if (!editor) return;
+  editor.selectedIndex = (editor.selectedIndex + delta + editor.images.length) % editor.images.length;
+  renderIntroEditor();
+}
+
+function finishCanvasDrag() {
+  const editor = state.introEditor;
+  if (!editor || !editor.drag) return;
+  if (editor.drag.type === "photo") {
+    const startIndex = editor.selectedIndex;
+    const targetIndex = editor.cells.findIndex(target =>
+      editor.drag.currentX >= target.x && editor.drag.currentX <= target.x + target.width &&
+      editor.drag.currentY >= target.y && editor.drag.currentY <= target.y + target.height
+    );
+    if (targetIndex >= 0 && targetIndex !== startIndex) {
+      [editor.images[startIndex], editor.images[targetIndex]] = [editor.images[targetIndex], editor.images[startIndex]];
+      editor.cells[startIndex].offsetX = 0;
+      editor.cells[startIndex].offsetY = 0;
+      editor.cells[targetIndex].offsetX = 0;
+      editor.cells[targetIndex].offsetY = 0;
+      editor.selectedIndex = targetIndex;
+    }
+  }
+  editor.drag = null;
+  renderIntroEditor();
+}
+
+function cycleIntroLayout() {
+  const editor = state.introEditor;
+  if (!editor) return;
+  editor.layoutIndex += 1;
+  editor.cells = layoutPhotoCells(editor.images, editor.canvas.width, editor.canvas.height, editor.layoutIndex);
+  editor.selectedIndex = 0;
+  renderIntroEditor();
+}
+
+function updateSelectedPhotoStatus() {
+  const editor = state.introEditor;
+  if (!editor || !editor.statusEl) return;
+  editor.statusEl.textContent = `目前調整第 ${editor.selectedIndex + 1} / ${editor.images.length} 張`;
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3, align = "left") {
+  const chars = [...text];
+  let line = "";
+  let lineCount = 0;
+  const drawLine = value => {
+    ctx.textAlign = align;
+    ctx.fillText(value, x, y);
+  };
+  for (const char of chars) {
+    const testLine = line + char;
+    if (ctx.measureText(testLine).width > maxWidth && line) {
+      drawLine(line);
+      line = char;
+      y += lineHeight;
+      lineCount += 1;
+      if (lineCount >= maxLines - 1) break;
+    } else {
+      line = testLine;
+    }
+  }
+  if (line && lineCount < maxLines) drawLine(line);
+}
+
+function roundRect(ctx, x, y, width, height, radius, fill) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + width, y, x + width, y + height, radius);
+  ctx.arcTo(x + width, y + height, x, y + height, radius);
+  ctx.arcTo(x, y + height, x, y, radius);
+  ctx.arcTo(x, y, x + width, y, radius);
+  ctx.closePath();
+  if (fill) ctx.fill();
 }
 
 function runSearch(query) {
@@ -617,6 +1625,7 @@ function showPage(page) {
   el.overviewPage.hidden = page !== "overview";
   el.detailPage.hidden = page !== "detail";
   el.searchPage.hidden = page !== "search";
+  el.quizPage.hidden = page !== "quiz";
 }
 
 function findSection(title) {
@@ -625,6 +1634,24 @@ function findSection(title) {
 
 function cleanNumber(text) {
   return text.replace(/^\d+\.\s*/, "");
+}
+
+function shuffle(items) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const next = Math.floor(Math.random() * (index + 1));
+    [result[index], result[next]] = [result[next], result[index]];
+  }
+  return result;
+}
+
+function slug(value) {
+  return String(value).replace(/[^\w\u4e00-\u9fa5]+/g, "-");
+}
+
+function cssEscape(value) {
+  if (window.CSS && CSS.escape) return CSS.escape(value);
+  return String(value).replaceAll('"', '\\"');
 }
 
 function escapeHtml(value) {
@@ -640,12 +1667,14 @@ el.searchInput.addEventListener("input", event => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => runSearch(event.target.value), 160);
 });
-document.querySelector("#backButton").addEventListener("click", () => openCategory("規章總覽"));
+document.querySelector("#backButton").addEventListener("click", () => openCategory(OVERVIEW_TITLE));
 document.querySelector("#clearSearch").addEventListener("click", () => {
   el.searchInput.value = "";
-  openCategory("規章總覽");
+  openCategory(OVERVIEW_TITLE);
 });
 document.querySelector("#shareButton").addEventListener("click", sharePage);
+document.querySelector("#submitQuiz").addEventListener("click", submitQuiz);
+document.querySelector("#shuffleQuiz").addEventListener("click", drawQuiz);
 
 async function sharePage() {
   const shareData = {
