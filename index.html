@@ -531,6 +531,34 @@ button, input, select, textarea { font: inherit; }
   text-align: center;
 }
 
+.mobile-save-panel {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  background: #fff8e8;
+  border: 2px dashed var(--gold);
+  border-radius: 16px;
+}
+
+.mobile-save-panel p {
+  margin: 0;
+  color: var(--teal-dark);
+  font-weight: 900;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.mobile-save-panel img {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  justify-self: center;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px #223c4226;
+  -webkit-touch-callout: default;
+  user-select: auto;
+}
+
 .vendor-directory {
   display: grid;
   gap: 16px;
@@ -1298,6 +1326,10 @@ function introGeneratorMarkup() {
         </div>
         <button id="downloadIntro" class="secondary-button" type="button">下載圖片</button>
         <p id="downloadStatus" class="download-status" aria-live="polite"></p>
+        <div id="mobileSavePanel" class="mobile-save-panel" hidden>
+          <p>手機瀏覽器若不支援下載，請長按下方圖片儲存，或分享到相簿/LINE。</p>
+          <img id="mobileSaveImage" alt="可長按儲存的自介圖片">
+        </div>
       </div>
     </section>
   `;
@@ -1310,6 +1342,8 @@ function bindIntroGenerator() {
   const canvas = document.querySelector("#introCanvas");
   const downloadButton = document.querySelector("#downloadIntro");
   const downloadStatus = document.querySelector("#downloadStatus");
+  const mobileSavePanel = document.querySelector("#mobileSavePanel");
+  const mobileSaveImage = document.querySelector("#mobileSaveImage");
   const selectedPhotoStatus = document.querySelector("#selectedPhotoStatus");
   const prevPhotoButton = document.querySelector("#selectPrevPhoto");
   const nextPhotoButton = document.querySelector("#selectNextPhoto");
@@ -1346,15 +1380,33 @@ function bindIntroGenerator() {
         downloadStatus.textContent = "下載失敗，請重新產生圖片後再試一次。";
         return;
       }
+      const file = new File([blob], "自介.png", { type: "image/png" });
       const url = URL.createObjectURL(blob);
+      mobileSaveImage.src = url;
+      mobileSavePanel.hidden = false;
+
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+        navigator.share({
+          files: [file],
+          title: "自介圖片",
+          text: "自介圖片已產生"
+        }).then(() => {
+          downloadStatus.textContent = "已開啟分享，可儲存到手機或傳到 LINE。";
+        }).catch(error => {
+          if (error.name !== "AbortError") {
+            downloadStatus.textContent = "分享未完成；可長按下方圖片儲存。";
+          }
+        });
+        return;
+      }
+
       const link = document.createElement("a");
       link.download = "自介.png";
       link.href = url;
       document.body.appendChild(link);
       link.click();
       link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      downloadStatus.textContent = "已送出下載，如果瀏覽器有詢問請選擇允許。";
+      downloadStatus.textContent = "已送出下載；若手機瀏覽器不支援，請長按下方圖片儲存。";
     }, "image/png");
   });
 
