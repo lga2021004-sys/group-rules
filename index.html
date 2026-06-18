@@ -531,6 +531,90 @@ button, input, select, textarea { font: inherit; }
   text-align: center;
 }
 
+.vendor-directory {
+  display: grid;
+  gap: 16px;
+}
+
+.vendor-note {
+  margin: 0;
+  padding: 14px 16px;
+  color: var(--teal-dark);
+  font-weight: 900;
+  line-height: 1.55;
+  background: #e8f4f1;
+  border: 1px solid #bfd0c8;
+  border-radius: 16px;
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.vendor-card {
+  overflow: hidden;
+  background: #fffef9;
+  border: 1px solid #d5d0c3;
+  border-radius: 16px;
+  box-shadow: 0 3px 9px #223c4220;
+}
+
+.vendor-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #dff2f4;
+}
+
+.vendor-body {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.vendor-kicker {
+  width: fit-content;
+  padding: 4px 9px;
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  background: var(--teal);
+  border-radius: 999px;
+}
+
+.vendor-body h3 {
+  margin: 0;
+  color: var(--teal-dark);
+  font-size: clamp(22px, 2.5vw, 28px);
+}
+
+.vendor-body dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.vendor-body dl div {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 6px;
+  align-items: start;
+}
+
+.vendor-body dt {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.vendor-body dd {
+  margin: 0;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
 footer {
   padding: 18px;
   text-align: center;
@@ -701,7 +785,46 @@ footer {
 const OVERVIEW_TITLE = "規章總覽";
 const QUIZ_TITLE = "入群測驗";
 const INTRO_TITLE = "自介相簿發布內容";
+const VENDOR_TITLE = "廠商及顧問";
 const PASS_SCORE = 8;
+
+const vendorProfiles = [
+  {
+    name: "羅律",
+    type: "顧問",
+    services: ["租賃", "感情"],
+    contact: "",
+    note: "小樹的主人",
+    imageAlt: "吉伊卡娃風格示意占位圖",
+    image: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+        <defs>
+          <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#fff8e8"/>
+            <stop offset="1" stop-color="#dff2f4"/>
+          </linearGradient>
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#155e69" flood-opacity=".22"/>
+          </filter>
+        </defs>
+        <rect width="900" height="560" fill="url(#bg)"/>
+        <circle cx="160" cy="120" r="68" fill="#f8d993" opacity=".75"/>
+        <circle cx="760" cy="430" r="86" fill="#a8dce2" opacity=".75"/>
+        <g filter="url(#shadow)">
+          <ellipse cx="450" cy="292" rx="210" ry="178" fill="#fffdf7"/>
+          <circle cx="292" cy="182" r="68" fill="#fffdf7"/>
+          <circle cx="608" cy="182" r="68" fill="#fffdf7"/>
+          <circle cx="376" cy="288" r="17" fill="#17272c"/>
+          <circle cx="524" cy="288" r="17" fill="#17272c"/>
+          <path d="M430 338 Q450 356 470 338" fill="none" stroke="#17272c" stroke-width="12" stroke-linecap="round"/>
+          <circle cx="326" cy="336" r="26" fill="#f5b3ad" opacity=".75"/>
+          <circle cx="574" cy="336" r="26" fill="#f5b3ad" opacity=".75"/>
+        </g>
+        <text x="450" y="512" text-anchor="middle" font-family="Microsoft JhengHei, sans-serif" font-size="34" font-weight="800" fill="#155e69">暫用示意圖</text>
+      </svg>
+    `)}`
+  }
+];
 
 const quizQuestions = [
   {
@@ -944,7 +1067,7 @@ function isNewItem(line, sectionTitle = "") {
 }
 
 function renderCategories() {
-  const titles = [OVERVIEW_TITLE, ...state.sections.map(section => section.title), QUIZ_TITLE];
+  const titles = [OVERVIEW_TITLE, ...state.sections.map(section => section.title), VENDOR_TITLE, QUIZ_TITLE];
   el.categoryStrip.innerHTML = titles.map(title =>
     `<button class="category-button ${title === state.active ? "active" : ""}"
       data-title="${escapeHtml(title)}">${escapeHtml(title)}</button>`
@@ -980,6 +1103,10 @@ function openCategory(title) {
     showPage("overview");
   } else if (title === QUIZ_TITLE) {
     showPage("quiz");
+  } else if (title === VENDOR_TITLE) {
+    el.detailTitle.textContent = VENDOR_TITLE;
+    el.ruleList.innerHTML = vendorDirectoryMarkup();
+    showPage("detail");
   } else {
     const section = findSection(title);
     if (!section) return;
@@ -989,6 +1116,39 @@ function openCategory(title) {
     showPage("detail");
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function vendorDirectoryMarkup() {
+  return `
+    <section class="vendor-directory">
+      <p class="vendor-note">以下為示範版面。正式上線前可再補照片、聯絡方式與注意事項。</p>
+      <div class="vendor-grid">
+        ${vendorProfiles.map(profile => `
+          <article class="vendor-card">
+            <img class="vendor-photo" src="${profile.image}" alt="${escapeHtml(profile.imageAlt)}">
+            <div class="vendor-body">
+              <div class="vendor-kicker">${escapeHtml(profile.type)}</div>
+              <h3>${escapeHtml(profile.name)}</h3>
+              <dl>
+                <div>
+                  <dt>服務：</dt>
+                  <dd>${escapeHtml(profile.services.join("、"))}</dd>
+                </div>
+                <div>
+                  <dt>聯絡：</dt>
+                  <dd>${escapeHtml(profile.contact || "待補")}</dd>
+                </div>
+                <div>
+                  <dt>備註：</dt>
+                  <dd>${escapeHtml(profile.note)}</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
 }
 
 function ruleCards(items, category = "") {
